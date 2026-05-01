@@ -182,6 +182,7 @@ pp_int32 SectionSamples::handleEvent(PPObject* sender, PPEvent* event)
 				break;
 			}
 
+#ifdef SYNTH
 			case BUTTON_SAMPLE_SYNTH:
 			{
 				getSampleEditorControl()->invokeSynth();
@@ -202,6 +203,7 @@ pp_int32 SectionSamples::handleEvent(PPObject* sender, PPEvent* event)
 				refresh();
 				break;
 			}
+#endif
 
 			case BUTTON_SAMPLE_PLAY_RANGE:
 			{
@@ -564,6 +566,7 @@ void SectionSamples::init(pp_int32 x, pp_int32 y)
 	if( !screen->getClassic() ) button->setColor(TrackerConfig::colorHighLight_1);
 	container->addControl(button);
 
+#ifdef SYNTH
 	button = new PPButton(BUTTON_SAMPLE_SYNTH, screen, this, PPPoint(x2+2 , y2+2), PPSize((size3*2)-1, bHeightm));
 	button->setText( "synth" );
 	if( !screen->getClassic() ){
@@ -587,6 +590,7 @@ void SectionSamples::init(pp_int32 x, pp_int32 y)
 		button->setTextColor(TrackerConfig::colorThemeMain);
 	}
 	container->addControl(button);
+#endif
 
 	
 	button = new PPButton(BUTTON_SAMPLE_PLAY_RANGE, screen, this, PPPoint(x2+2 + size+size2-1, y2+2+bHeight), PPSize(size3, bHeightm));
@@ -1276,7 +1280,8 @@ void SectionSamples::realUpdate(bool repaint, bool force, bool reAttach)
 	static_cast<PPButton*>(container7->getControlByID(BUTTON_SAMPLE_PLAY_RANGE))->setClickable(sampleEditorControl->hasValidSelection());	
 	static_cast<PPButton*>(container7->getControlByID(BUTTON_SAMPLE_PLAY_WAVE))->setClickable(!sampleEditor->isEmptySample());	
 	static_cast<PPButton*>(container7->getControlByID(BUTTON_SAMPLE_PLAY_DISPLAY))->setClickable(!sampleEditor->isEmptySample());	
-	
+
+#ifdef SYNTH
 	static_cast<PPButton*>(container7->getControlByID(BUTTON_SAMPLE_SYNTH_PREV))->setClickable(
 			sampleEditor->isEmptySample() || 
 			sampleEditor->wasGeneratedByMilkySynth() 
@@ -1285,6 +1290,7 @@ void SectionSamples::realUpdate(bool repaint, bool force, bool reAttach)
 			sampleEditor->isEmptySample() || 
 			sampleEditor->wasGeneratedByMilkySynth() 
 	);
+#endif
 	
 	PPContainer* container9 = static_cast<PPContainer*>(screen->getControlByID(CONTAINER_SAMPLE_EDIT1));
 	bool b = (sampleEditorControl->getCurrentRangeLength()) > 0 && sampleEditorControl->hasValidSelection();

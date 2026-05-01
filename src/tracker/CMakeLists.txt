@@ -132,9 +132,6 @@ add_executable(tracker
     SectionUpperLeft.cpp
     SystemMessage.cpp
     fx/Filter.cpp
-    Synth.cpp
-    Synths.cpp
-    SynthFM.cpp
     TabHeaderControl.cpp
     TabManager.cpp
     TabTitleProvider.cpp
@@ -206,8 +203,6 @@ add_executable(tracker
     ResamplerHelper.h
 	VolumeRampHelper.h
     fx/Filter.h
-    Synth.h
-	  SynthFM.h
     SIPButtons.h
     SampleEditor.h
     SampleEditorControl.h
@@ -242,6 +237,17 @@ add_executable(tracker
     VRand.h
     Zapper.h
 )
+
+if(SYNTH)
+	target_sources(tracker PRIVATE
+        Synth.h
+        synth/SynthFM.h
+        synth/SynthFM.cpp
+        Synth.cpp
+        Synths.cpp
+    )
+endif()
+
 
 # Set target name for the executable
 if(APPLE OR WIN32)

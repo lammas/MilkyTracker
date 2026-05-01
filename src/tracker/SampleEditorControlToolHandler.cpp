@@ -342,6 +342,7 @@ bool SampleEditorControl::invokeToolParameterDialog(SampleEditorControl::ToolHan
       break;
     }
 
+    #ifdef SYNTH
     case ToolHandlerResponder::SampleToolTypeSynth:
     {
       // triggered when user presses 'synth'-button
@@ -354,6 +355,7 @@ bool SampleEditorControl::invokeToolParameterDialog(SampleEditorControl::ToolHan
 	  tracker->screen->setFocus(this); // dont clutter live notes to pattern 
       break;
     }
+	#endif
 
 	case ToolHandlerResponder::SampleToolTypeSoundfont:
 	{

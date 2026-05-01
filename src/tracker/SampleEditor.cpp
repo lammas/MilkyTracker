@@ -314,8 +314,10 @@ SampleEditor::SampleEditor() :
 
 	memset(&lastSample, 0, sizeof(lastSample));
 
-	// sampleRate is not perfect (ideally get this from settingsDatabase)
+  // sampleRate is not perfect (ideally get this from settingsDatabase)
+  #ifdef SYNTH
   synth = new Synth(PlayerMaster::getPreferredSampleRate());
+  #endif
 }
 
 SampleEditor::~SampleEditor()
@@ -324,7 +326,9 @@ SampleEditor::~SampleEditor()
 	delete undoHistory;
 	delete undoStack;
 	delete before;
-  delete synth;
+    #ifdef SYNTH
+    delete synth;
+    #endif
 }
 
 void SampleEditor::attachSample(TXMSample* sample, XModule* module) 
@@ -3781,6 +3785,7 @@ void SampleEditor::tool_delay(const FilterParameters* par)
 
 void SampleEditor::tool_synth(const FilterParameters* par)
 {
+  #ifdef SYNTH
   prepareUndo();
   preFilter(&SampleEditor::tool_synth, par);
 
@@ -3805,6 +3810,7 @@ void SampleEditor::tool_synth(const FilterParameters* par)
 
   finishUndo();
   postFilter();
+  #endif
 }
 
 

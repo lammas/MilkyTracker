@@ -35,6 +35,11 @@ add_definitions(-DMILKYTRACKER)
 # Adhere to GNU filesystem layout conventions
 include(GNUInstallDirs)
 
+option(SYNTH "Include milkysynths" ON)
+if(SYNTH)
+	add_definitions(-DSYNTH)
+endif()
+
 # Force SDL if requested
 option(FORCESDL "Force SDL instead of native" OFF)
 if(FORCESDL)

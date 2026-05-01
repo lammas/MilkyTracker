@@ -129,7 +129,10 @@ private:
 	bool drawing;
 	pp_int32 lastSamplePos;
 
-  Synth *synth;
+    #ifdef SYNTH
+    Synth *synth;
+    friend class Synth;
+    #endif
 
 	void prepareUndo();
 	void finishUndo();
@@ -138,7 +141,6 @@ private:
 	
 	void notifyChanges(bool condition, bool lazy = true);
  
-  friend class Synth;
   friend class Tracker;
   friend class Addon;
 	
@@ -160,7 +162,9 @@ public:
 	bool canMinimize() const;
 	bool isEditableSample() const;
 
+    #ifdef SYNTH
     Synth *getSynth(){ return synth; }
+    #endif
 
 	void setSelectionStart(pp_int32 selectionStart) { this->selectionStart = selectionStart; }
 	pp_int32& getSelectionStart() { return selectionStart; }

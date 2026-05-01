@@ -24,10 +24,10 @@
 
 
 #include "Synth.h" 
-#include "SynthFM.h"
+#include "synth/SynthFM.h"
 
 #define PL_SYNTH_IMPLEMENTATION
-#include "SynthPL.h"
+#include "synth/SynthPL.h"
 
 #include "Tracker.h"
 #include "ControlIDs.h"
